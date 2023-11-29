@@ -11,7 +11,7 @@ Make sure to have the following components installed before running the tests:
 ## Project Setup
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/your-project.git
+   git clone https://github.com/lcastanoj/sauceDemo.git
    cd your-project
 
 ## Install Dependencies:
