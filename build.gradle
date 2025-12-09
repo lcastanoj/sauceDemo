@@ -4,6 +4,7 @@ plugins {
     id 'idea'
     id 'net.serenity-bdd.serenity-gradle-plugin' version '4.2.8'
     id 'org.sonarqube' version '5.1.0.4882'
+    id 'jacoco'
 }
 
 sonar {
@@ -11,6 +12,8 @@ sonar {
         property "sonar.projectKey", "lcastanoj_sauceDemo"
         property "sonar.organization", "lcastanoj"
         property "sonar.host.url", "https://sonarcloud.io"
+        // Ruta al reporte XML de JaCoCo que generaremos
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
     }
 }
 
@@ -58,6 +61,20 @@ serenity {
     testRoot = "runners"
     requirementsBaseDir = "src/test/resources/features"
     reports = ["single-page-html"]
+}
+
+// --- JACOCO ---
+// Que Jacoco se ejecute después de los tests y genere XML
+test {
+    finalizedBy jacocoTestReport  // al acabar los tests, genera el reporte de cobertura
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
 }
 
 // Agregar reports Serenity después de test
